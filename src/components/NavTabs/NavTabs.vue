@@ -9,3 +9,10 @@ import Tab from "./Tab.vue";
     <Tab class="tab" :section="'Visualisations'" />
   </div>
 </template>
+
+<style>
+.nav-tabs {
+  height: 4.056rem;
+  display: flex;
+}
+</style>
