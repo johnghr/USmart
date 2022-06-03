@@ -1,4 +1,6 @@
 <script setup>
+import LeafletMap from "./components/LeafletMap.vue";
+
 console.log("hello");
 </script>
 
@@ -10,6 +12,7 @@ console.log("hello");
         <div class="tab"><h4>Data Explorer</h4></div>
         <div class="tab"><h4>Visualisations</h4></div>
       </div>
+      <LeafletMap />
     </div>
   </div>
 </template>
@@ -46,13 +49,17 @@ body {
 .tab {
   text-align: start;
   width: calc(100% / 3);
-  background-color: #6c6c6c;
-  /* border-bottom: solid 1px #2e3032 !important; */
+  background-color: #999999;
+  border-bottom: solid 1px #2e3032;
+}
+
+.tab:hover {
+  background-color: #fff;
 }
 
 #selected {
   background-color: #fff;
-  border: none;
+  border-bottom: none;
 }
 
 h4 {
