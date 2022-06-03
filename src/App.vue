@@ -3,8 +3,12 @@ import { onBeforeMount } from "vue";
 import Map from "./components/Map.vue";
 import NavTabs from "./components/NavTabs/NavTabs.vue";
 import { useDataStore } from "./stores/data";
+import DataExplorer from "./components/DataExplorer.vue";
+import Visualisations from "./components/Visualisations.vue";
 
 const dataStore = useDataStore();
+
+const logData = () => dataStore.data.forEach((datum) => console.log(datum));
 
 onBeforeMount(dataStore.getData());
 </script>
@@ -15,7 +19,10 @@ onBeforeMount(dataStore.getData());
       <NavTabs />
       <div class="card-body">
         <Map />
+        <DataExplorer />
+        <Visualisations />
       </div>
+      <button @click="logData()">Push me</button>
     </div>
   </div>
 </template>
@@ -48,5 +55,6 @@ body {
   display: flex;
   justify-content: center;
   height: 100%;
+  padding: 1.438rem 1.563rem;
 }
 </style>

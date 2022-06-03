@@ -30,6 +30,8 @@ defineProps({
   width: calc(100% / 3);
   background-color: #999999;
   border-bottom: solid 2px #2e3032;
+  border-right: solid 1px #2e3032;
+  border-left: solid 1px #2e3032;
 }
 
 .tab:hover {
@@ -39,8 +41,6 @@ defineProps({
 .selected {
   background-color: #fff;
   border-bottom: none;
-  border-right: solid 2px #2e3032;
-  border-left: solid 2px #2e3032;
 }
 
 h4 {
