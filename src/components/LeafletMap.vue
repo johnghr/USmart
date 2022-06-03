@@ -19,66 +19,12 @@ const zoom = 14;
 const attribution =
   '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors';
 const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-// export default {
-//   components: {
-//     LMap,
-//     LTileLayer,
-//     LMarker,
-//     LTooltip,
-//     LocationSearch,
-//   },
-
-//   props: {
-//     latlng: {
-//       type: Object,
-//       required: false,
-//     },
-//     center: {
-//       type: Object,
-//       required: false,
-//     },
-//     draggable: {
-//       type: Boolean,
-//       required: true,
-//     },
-//   },
-
-//   watch: {
-//     latlng: function (newVal) {
-//       this.currentCenter = newVal;
-//     },
-//   },
-
-//   data() {
-//     const { latlng } = this;
-
-//     const markerLatLng = latlng ? [latlng.lat, latlng.lng] : null;
-
-//     let currentCenter;
-
-//     this.center !== undefined
-//       ? (currentCenter = this.center)
-//       : (currentCenter = defaultCenter);
-
-// return {
-//   currentCenter,
-//   markerLatLng,
-
-//   zoom: 14,
-//   ,
-//   query: "",
-//   results: [],
-//   url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-//   attribution:
-//     ,
-// };
-//   },
-// };
 </script>
 
 <style>
 .map {
-  height: 90%;
-  width: 90%;
+  height: 88%;
+  width: 100%;
+  padding: 1rem;
 }
 </style>

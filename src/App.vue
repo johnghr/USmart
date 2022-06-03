@@ -1,18 +1,36 @@
 <script setup>
 import LeafletMap from "./components/LeafletMap.vue";
+import { ref } from "vue";
 
-console.log("hello");
+const activeSection = ref("MAP");
+
+const setCurrentSection = (section) => {
+  console.log(["CATEGORY", "SECTION", "DOCUMENT"].includes(section));
+  if (["MAP", "DATA", "VISUALISATIONS"].includes(section)) {
+    activeSection.value = section;
+  } else {
+    console.error(`Unknown section: ${section}`);
+  }
+};
 </script>
 
 <template>
   <div class="app">
     <div class="card">
       <div class="nav-tabs">
-        <div class="tab" id="selected"><h4>Map</h4></div>
-        <div class="tab"><h4>Data Explorer</h4></div>
-        <div class="tab"><h4>Visualisations</h4></div>
+        <div class="tab" id="selected" @click="setCurrentSection('MAP')">
+          <h4>Map</h4>
+        </div>
+        <div class="tab" @click="setCurrentSection('DATA')">
+          <h4>Data Explorer</h4>
+        </div>
+        <div class="tab" @click="setCurrentSection('VISUALISATIONS')">
+          <h4>Visualisations</h4>
+        </div>
       </div>
-      <LeafletMap />
+      <div class="card-body">
+        <LeafletMap />
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +57,12 @@ body {
   margin-top: auto;
   width: 100.625rem;
   height: 50.972rem;
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  height: 100%;
 }
 
 .nav-tabs {
