@@ -1,5 +1,5 @@
 <template>
-  <div class="map">
+  <div class="map" v-if="appStore.activeSection === 'Map'">
     <l-map :center="center" :options="mapOptions" ref="map" :zoom="zoom">
       <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
     </l-map>
@@ -10,6 +10,8 @@
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
 import { ref } from "vue";
+import { useAppStore } from "../stores/app";
+const appStore = useAppStore();
 
 const center = ref([56.0717, -3.4522]);
 const mapOptions = {

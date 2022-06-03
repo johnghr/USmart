@@ -1,6 +1,12 @@
 <script setup>
-import LeafletMap from "./components/LeafletMap.vue";
+import { onBeforeMount } from "vue";
+import Map from "./components/Map.vue";
 import NavTabs from "./components/NavTabs/NavTabs.vue";
+import { useDataStore } from "./stores/data";
+
+const dataStore = useDataStore();
+
+onBeforeMount(dataStore.getData());
 </script>
 
 <template>
@@ -8,7 +14,7 @@ import NavTabs from "./components/NavTabs/NavTabs.vue";
     <div class="card">
       <NavTabs />
       <div class="card-body">
-        <LeafletMap />
+        <Map />
       </div>
     </div>
   </div>
@@ -42,13 +48,5 @@ body {
   display: flex;
   justify-content: center;
   height: 100%;
-}
-
-h4 {
-  text-align: left;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  color: #2e3032;
-  padding: 1rem;
 }
 </style>
