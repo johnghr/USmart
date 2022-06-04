@@ -69,6 +69,9 @@ const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
             <b>Mode:</b>
             {{ data["Class Name"] }}
             <br />
+            <b>Date:</b>
+            {{ data.ISODateTime.slice(0, 10) }}
+            <br />
             <b>Count:</b>
             {{ data.Count }}
             <br />

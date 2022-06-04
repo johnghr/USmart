@@ -3,16 +3,18 @@
     <button
       type="button"
       class="button-left"
-      :class="[selected === 'pedestrian' ? selectedLeft : '']"
-      @click="handleToggle('pedestrian')"
+      :class="[
+        dataStore.selectedClassName === 'pedestrian' ? selectedLeft : '',
+      ]"
+      @click="dataStore.filterByClassName('pedestrian')"
     >
       <Pedestrian style="height: 1.25rem; width: 1.25rem" aria-hidden="true" />
     </button>
     <button
       type="button"
       class="button-right"
-      :class="[selected === 'bicycle' ? selectedRight : '']"
-      @click="handleToggle('bicycle')"
+      :class="[dataStore.selectedClassName === 'bicycle' ? selectedRight : '']"
+      @click="dataStore.filterByClassName('bicycle')"
     >
       <Bicycle style="height: 1.25rem; width: 1.25rem" aria-hidden="true" />
     </button>
@@ -20,7 +22,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useDataStore } from "../../stores/data";
 
 import Bicycle from "../Icons/Bicycle.vue";
@@ -28,14 +29,8 @@ import Pedestrian from "../Icons/Pedestrian.vue";
 
 const dataStore = useDataStore();
 
-const selected = ref("pedestrian");
 const selectedLeft = "selected-left";
 const selectedRight = "selected-right";
-
-const handleToggle = (className) => {
-  dataStore.filterByClassName(className);
-  selected.value = className;
-};
 </script>
 
 <style>
