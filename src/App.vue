@@ -10,7 +10,7 @@ const dataStore = useDataStore();
 
 const logData = () => dataStore.data.forEach((datum) => console.log(datum));
 
-onBeforeMount(dataStore.getData());
+onBeforeMount(dataStore.getCurrentData());
 </script>
 
 <template>

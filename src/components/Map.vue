@@ -4,14 +4,17 @@ import { LMap, LTileLayer, LCircle, LPopup } from "@vue-leaflet/vue-leaflet";
 import { ref } from "vue";
 import { useAppStore } from "../stores/app";
 import { useDataStore } from "../stores/data";
+
 const appStore = useAppStore();
 const dataStore = useDataStore();
 
-const center = ref([56.0717, -3.4522]);
+const date = ref(useDataStore.initialDate);
+
+const center = ref([57.5717, -3.4522]);
 const mapOptions = {
   zoomSnap: 0.5,
 };
-const zoom = 14;
+const zoom = 6.5;
 const attribution =
   '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors';
 const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -27,19 +30,38 @@ const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 <template>
   <div class="map" v-if="appStore.activeSection === 'Map'">
-    <l-map :center="center" :options="mapOptions" ref="map" :zoom="zoom">
-      <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
-      <l-circle
-        v-for="data in dataStore.data"
+    <label for="map-date">
+      Select a date:
+      <input
+        id="map-date"
+        name="map-date"
+        type="date"
+        :value="dataStore.initialDate"
+        :v-model="date"
+        @input="
+          (event) => {
+            dataStore.getData(event);
+          }
+        "
+      />
+    </label>
+
+    <LMap :center="center" :options="mapOptions" ref="map" :zoom="zoom">
+      <LTileLayer :attribution="attribution" :url="url"></LTileLayer>
+      <LCircle
+        v-for="data in dataStore.currentData"
         :key="data.usmart_id"
         :lat-lng="[data.Latitude, data.Longitude]"
         :radius="10"
         visible
       >
-        <l-popup>
+        <LPopup>
           <div>
             <b>Location:</b>
             {{ data.Location }}
+            <br />
+            <b>Mode:</b>
+            {{ data.ClassName }}
             <br />
             <b>Count:</b>
             {{ data.Count }}
@@ -51,8 +73,8 @@ const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
             {{ data.Longitude }}
             <br />
           </div>
-        </l-popup>
-      </l-circle>
-    </l-map>
+        </LPopup>
+      </LCircle>
+    </LMap>
   </div>
 </template>
