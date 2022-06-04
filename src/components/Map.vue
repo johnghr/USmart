@@ -52,7 +52,14 @@ const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
       <Toggle />
     </div>
 
-    <LMap :center="center" :options="mapOptions" ref="map" :zoom="zoom">
+    <LMap
+      :center="center"
+      :options="mapOptions"
+      :minZoom="3"
+      :maxZoom="15"
+      ref="map"
+      :zoom="zoom"
+    >
       <LTileLayer :attribution="attribution" :url="url"></LTileLayer>
       <LCircle
         v-for="data in dataStore.filteredData"
