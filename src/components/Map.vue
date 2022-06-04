@@ -8,7 +8,7 @@ import { useDataStore } from "../stores/data";
 const appStore = useAppStore();
 const dataStore = useDataStore();
 
-const date = ref(useDataStore.initialDate);
+const date = ref(dataStore.newestDate);
 
 const center = ref([57.5717, -3.4522]);
 const mapOptions = {
@@ -36,7 +36,9 @@ const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
         id="map-date"
         name="map-date"
         type="date"
-        :value="dataStore.initialDate"
+        :min="dataStore.oldestDate"
+        :max="dataStore.newestDate"
+        :value="dataStore.newestDate"
         :v-model="date"
         @input="
           (event) => {
