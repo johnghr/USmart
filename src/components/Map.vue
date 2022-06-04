@@ -4,6 +4,7 @@ import { LMap, LTileLayer, LCircle, LPopup } from "@vue-leaflet/vue-leaflet";
 import { ref } from "vue";
 import { useAppStore } from "../stores/app";
 import { useDataStore } from "../stores/data";
+import Toggle from "./Toggle/Toggle.vue";
 
 const appStore = useAppStore();
 const dataStore = useDataStore();
@@ -30,23 +31,26 @@ const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 <template>
   <div class="map" v-if="appStore.activeSection === 'Map'">
-    <label for="map-date">
-      Select a date:
-      <input
-        id="map-date"
-        name="map-date"
-        type="date"
-        :min="dataStore.oldestDate"
-        :max="dataStore.newestDate"
-        :value="dataStore.newestDate"
-        :v-model="date"
-        @input="
-          (event) => {
-            dataStore.getData(event);
-          }
-        "
-      />
-    </label>
+    <div class="data-filters">
+      <label for="map-date">
+        Select a date:
+        <input
+          id="map-date"
+          name="map-date"
+          type="date"
+          :min="dataStore.oldestDate"
+          :max="dataStore.newestDate"
+          :value="dataStore.newestDate"
+          :v-model="date"
+          @input="
+            (event) => {
+              dataStore.getData(event);
+            }
+          "
+        />
+      </label>
+      <Toggle />
+    </div>
 
     <LMap :center="center" :options="mapOptions" ref="map" :zoom="zoom">
       <LTileLayer :attribution="attribution" :url="url"></LTileLayer>
@@ -63,7 +67,7 @@ const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
             {{ data.Location }}
             <br />
             <b>Mode:</b>
-            {{ data.ClassName }}
+            {{ data["Class Name"] }}
             <br />
             <b>Count:</b>
             {{ data.Count }}
