@@ -5,6 +5,7 @@ export const useDataStore = defineStore("data", () => {
   const newestDate = ref(null);
   const oldestDate = ref(null);
   const currentData = ref([]);
+  const filteredData = ref([]);
 
   const setupInitialData = async () => {
     await Promise.all([
@@ -14,6 +15,8 @@ export const useDataStore = defineStore("data", () => {
         .then((response) => response.json())
         .then((data) => {
           currentData.value = data;
+          filterByClassName("pedestrian");
+          console.log("filteredData", filteredData.value);
           newestDate.value = currentData.value[0].ISODateTime.slice(0, 10);
         }),
       fetch(
@@ -32,10 +35,18 @@ export const useDataStore = defineStore("data", () => {
       .then((data) => (currentData.value = data));
   };
 
+  const filterByClassName = (className) => {
+    filteredData.value = currentData.value.filter(
+      (data) => data["Class Name"] === className
+    );
+  };
+
   return {
+    currentData,
+    filteredData,
     newestDate,
     oldestDate,
-    currentData,
+    filterByClassName,
     getData,
     setupInitialData,
   };

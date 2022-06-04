@@ -33,7 +33,7 @@ const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
   <div class="map" v-if="appStore.activeSection === 'Map'">
     <div class="data-filters">
       <label for="map-date">
-        Select a date:
+        Date:
         <input
           id="map-date"
           name="map-date"
@@ -55,7 +55,7 @@ const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
     <LMap :center="center" :options="mapOptions" ref="map" :zoom="zoom">
       <LTileLayer :attribution="attribution" :url="url"></LTileLayer>
       <LCircle
-        v-for="data in dataStore.currentData"
+        v-for="data in dataStore.filteredData"
         :key="data.usmart_id"
         :lat-lng="[data.Latitude, data.Longitude]"
         :radius="10"
@@ -84,3 +84,12 @@ const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
     </LMap>
   </div>
 </template>
+
+<style>
+.data-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+</style>

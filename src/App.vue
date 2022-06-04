@@ -8,8 +8,6 @@ import Visualisations from "./components/Visualisations.vue";
 
 const dataStore = useDataStore();
 
-const logData = () => dataStore.data.forEach((datum) => console.log(datum));
-
 onBeforeMount(dataStore.setupInitialData());
 </script>
 
@@ -22,7 +20,6 @@ onBeforeMount(dataStore.setupInitialData());
         <DataExplorer />
         <Visualisations />
       </div>
-      <button @click="logData()">Push me</button>
     </div>
   </div>
 </template>
@@ -55,6 +52,5 @@ body {
   display: flex;
   justify-content: center;
   height: 100%;
-  padding: 1.438rem 1.563rem;
 }
 </style>
