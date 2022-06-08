@@ -9,6 +9,8 @@ export const useDataStore = defineStore("data", () => {
   const selectedClassName = ref("");
   const locations = ref([]);
   const currentLocationData = ref([]);
+  const pedestrianData = ref([]);
+  const bicycleData = ref([]);
 
   const setupInitialData = async () => {
     await Promise.all([
@@ -23,11 +25,6 @@ export const useDataStore = defineStore("data", () => {
           locations.value = currentData.value
             .map((data) => data.Location)
             .sort();
-          console.log(locations.value);
-          // locations.value = currentData.value.map((data) => {
-          //   locations.value.push(data.Location);
-          //   locations.value.sort();
-          // });
         }),
       fetch(
         "https://api.usmart.io/org/d1b773fa-d2bd-4830-b399-ecfd18e832f3/02444e7a-5bd4-4ef3-9c66-e26671bb4c8a/latest/urql?sort(+ISODateTime)&limit(1)"
@@ -55,12 +52,12 @@ export const useDataStore = defineStore("data", () => {
       .replace(/\)/g, "%29");
 
     await fetch(
-      `https://api.usmart.io/org/d1b773fa-d2bd-4830-b399-ecfd18e832f3/02444e7a-5bd4-4ef3-9c66-e26671bb4c8a/1/urql?Location=${uri}`
+      `https://api.usmart.io/org/d1b773fa-d2bd-4830-b399-ecfd18e832f3/02444e7a-5bd4-4ef3-9c66-e26671bb4c8a/1/urql?Location=${uri}&limit(-1)`
     )
       .then((response) => response.json())
       .then((data) => {
         currentLocationData.value = data;
-        console.log(currentLocationData.value);
+        sortLocationData();
       });
   };
 
@@ -71,12 +68,23 @@ export const useDataStore = defineStore("data", () => {
     );
   };
 
+  const sortLocationData = () => {
+    currentLocationData.value.map((location) => {
+      location["Class Name"] === "pedestrian"
+        ? (pedestrianData.value = [...pedestrianData.value, location])
+        : (bicycleData.value = [...bicycleData.value, location]);
+    });
+  };
+
   return {
+    bicycleData,
     currentData,
+    currentLocationData,
     filteredData,
     locations,
     newestDate,
     oldestDate,
+    pedestrianData,
     selectedClassName,
     filterByClassName,
     getLocationData,

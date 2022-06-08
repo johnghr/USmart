@@ -1,7 +1,7 @@
 <script setup>
 import { useAppStore } from "../../stores/app";
 import { useDataStore } from "../../stores/data";
-import LineChart from "./LineChart";
+import LineChart from "./LineChart.vue";
 
 const appStore = useAppStore();
 const dataStore = useDataStore();
@@ -41,7 +41,10 @@ const dataStore = useDataStore();
 .chart-container {
   display: flex;
   display: flex;
-  margin-top: 10rem;
+  margin-top: 2rem;
   justify-content: center;
+}
+.data-filters {
+  padding: 1rem;
 }
 </style>
