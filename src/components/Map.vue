@@ -44,7 +44,7 @@ const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
           :v-model="date"
           @input="
             (event) => {
-              dataStore.getData(event);
+              dataStore.getMapData(event);
             }
           "
         />

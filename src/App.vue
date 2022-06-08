@@ -1,14 +1,13 @@
 <script setup>
-import { onBeforeMount } from "vue";
+import { onMounted } from "vue";
 import Map from "./components/Map.vue";
 import NavTabs from "./components/NavTabs/NavTabs.vue";
 import { useDataStore } from "./stores/data";
 import DataExplorer from "./components/DataExplorer.vue";
-import Visualisations from "./components/Visualisations.vue";
+import Visualisations from "./components/Visualisation/Visualisations.vue";
 
 const dataStore = useDataStore();
-
-onBeforeMount(dataStore.setupInitialData());
+onMounted(dataStore.setupInitialData());
 </script>
 
 <template>
